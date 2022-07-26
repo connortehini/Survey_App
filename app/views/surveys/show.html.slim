@@ -1,0 +1,96 @@
+h1 #{@survey.title} 
+
+
+- if !@question.nil?
+
+  -@survey.questions.each do |question|
+    div 
+      p = question.title
+
+      -if @question.question_type == 'multiple_choice'
+        =form_with model: @answer do |form|
+          div 
+            = form.hidden_field :question_id, value:@question.id
+          - if @answer.question.choice_1 !=''
+          div
+            = form.radio_button :multiple_answer_choice, @answer.question.choice_1
+            = form.label @answer.question.choice_1
+          - if @answer.question.choice_2 !=''
+          div
+            = form.radio_button :multiple_answer_choice, @answer.question.choice_2
+            =form.label @answer.question.choice_2   
+          - if @answer.question.choice_3 !=''
+          div
+            = form.radio_button :multiple_answer_choice, @answer.question.choice_3
+            = form.label @answer.question.choice_3 
+          - if @answer.question.choice_4 !=''
+          div
+            = form.radio_button :multiple_answer_choice, @answer.question.choice_4
+            =form.label @answer.question.choice_4
+          - if @answer.question.choice_5 !=''
+          div
+            = form.radio_button :multiple_answer_choice, @answer.question.choice_5
+            =form.label @answer.question.choice_5
+          div 
+            ul 
+              - if @question.next != nil 
+                li = form.submit
+              -elsif @question.next == nil 
+                li = form.submit 
+
+
+      -elsif @question.question_type == 'open_ended'
+        = form_with model: @answer  do |form|
+          div 
+            = form.hidden_field :question_id, value:@question.id 
+          / div 
+          /   = form.label @answer.question.title
+          div
+            = form.text_area :open_ended_answer
+          div 
+            ul  
+              -if @question.next != nil 
+                = form.submit
+              -elsif @question.next == nil 
+                = form.submit 
+
+      - elsif @question.question_type == 'muliple_answer'
+        = form_with model: @answer do |form|
+          div 
+            = form.hidden_field :question_id
+          - if @answer.question.choice_1
+          div 
+            = form.check_box :choice_1
+            = form.label @answer.question.choice_1
+          - if @answer.question.choice_2
+          div 
+            =form.check_box :choice_2
+            = form.label @answer.question.choice_2
+          - if @answer.question.choice_3
+          div 
+            = form.check_box :choice_3
+            = form.label @answer.question.choice_3
+          - if @answer.question.choice_4
+          div 
+            = form.check_box :choice_4
+            = form.label @answer.question.choice_4
+          - if @answer.question.choice_5
+          div 
+            = form.check_box :choice_5
+            = form.label @answer.question.choice_5
+          
+          div 
+            ul 
+              - if @question.next != nil 
+                li 
+                  = form.submit
+              - elsif @question.next == nil 
+                li 
+                  = form.submit
+
+li 
+  = link_to 'Delete Survey', survey_path, method: :delete, data: {confirm: 'Are you sure'}
+li 
+  = link_to 'Return Home', root_path 
+li 
+  = link_to 'Add question', new_survey_question_path(@survey)
