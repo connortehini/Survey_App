@@ -1,0 +1,18 @@
+h1 Edit Survey 
+
+= render 'form', survey: @survey
+
+h1 Questions
+
+
+- @survey.questions.each do |question|
+  li = question.title
+  li = link_to 'Edit Question', edit_survey_question_path(@survey, question, question_type: question.question_type)
+
+
+
+
+ul 
+
+li 
+  = link_to 'Return Home', root_path 

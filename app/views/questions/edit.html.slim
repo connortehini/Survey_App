@@ -1,2 +1,72 @@
-- if @question.quuestion_type == 'multiple_choice'
-    = form_with model: [@question.survey, @question]
+h1 Edit Question 
+  
+- if params[:question_type] == 'multiple_choice'
+  = form_with model: [@survey, @question] do |form|
+    div   
+      = form.hidden_field :question_type, value: params[:question_type] 
+      = form.label :title
+    div 
+      = form.text_area :title
+    div 
+      = form.label :option_1 
+    div  
+      = form.text_field :option_1 
+    div 
+      = form.label :option_2 
+    div  
+      = form.text_field :option_2
+    div 
+      = form.label :option_3 
+    div  
+      = form.text_field :option_3
+    div 
+      = form.label :option_4 
+    div  
+      = form.text_field :option_4
+    div 
+      = form.label :option_5
+    div  
+      = form.text_field :option_5   
+    div 
+      = form.submit 
+
+- elsif params[:question_type] == 'open_ended'
+  = form_with model: [@question.survey, @question] do |form|
+    div 
+      = form.hidden_field :question_type, value: params[:question_type] 
+      = form.label :title
+    div
+      = form.text_area :title
+    div 
+      = form.submit 'Submit'
+
+- elsif params[:question_type] == 'multiple_answer'
+  = form_with model: [@question.survey, @question] do |form|
+    div 
+      =form.hidden_field :question_type, value: params[:question_type]
+      = form.label :title
+    div
+      = form.text_area :title
+    div 
+      = form.label :option_1
+    div  
+      = form.text_field :option_1
+    div 
+      = form.label :option_2
+    div  
+      = form.text_field :option_2
+    div 
+      = form.label :option_3
+    div  
+      = form.text_field :option_3
+    div 
+      = form.label :option_4
+    div  
+      = form.text_field :option_4   
+    div 
+      = form.label :option_5
+    div  
+      = form.text_field :option_5
+    div 
+      = form.submit 'Submit'
+

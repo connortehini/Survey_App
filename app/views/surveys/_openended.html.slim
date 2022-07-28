@@ -1,0 +1,13 @@
+= form_with model: answer  do |form|
+  div 
+    = form.hidden_field :question_id, value: question.id 
+  div 
+    = form.label answer.question.title
+  div
+    = form.text_area :open_ended_answer
+  div 
+    ul  
+      -if question.next != nil 
+        = form.submit 'Next Question'
+      -elsif question.next == nil 
+        = form.submit 'Submit Survey'

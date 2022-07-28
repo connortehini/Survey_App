@@ -14,7 +14,8 @@ class SurveysController < ApplicationController
       @question = Question.find(params[:question_id])
       @answer = @question.answers.new()
     else 
-      @question = nil
+      @question = Question.first
+      # @question = nil 
     end 
   end 
 
@@ -23,11 +24,10 @@ class SurveysController < ApplicationController
   end 
 
   def create 
-    user = current_user
-    @survey = user.surveys.new(survey_params)
+    @survey = Survey.new(survey_params)
 
     if @survey.save 
-      redirect_to survey_path(@survey)
+      redirect_to @survey
     else 
       render :new 
     end 

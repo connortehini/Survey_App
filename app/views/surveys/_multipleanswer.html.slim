@@ -1,0 +1,34 @@
+= form_with model: answer do |form|
+  div 
+    = form.hidden_field :question_id, value:question.id 
+    = form.label answer.question.title
+  - if answer.question.option_1
+    div 
+      = form.check_box :option_1
+      = form.label answer.question.option_1
+  - if answer.question.option_2
+    div 
+      =form.check_box :option_2
+      = form.label answer.question.option_2
+  - if answer.question.option_3
+    div 
+      = form.check_box :option_3
+
+      = form.label answer.question.option_3
+  - if answer.question.option_4
+    div 
+      = form.check_box :option_4
+      = form.label answer.question.option_4
+  - if answer.question.option_5
+    div 
+      = form.check_box :option_5  
+      = form.label answer.question.option_5
+  
+  div 
+    ul 
+      - if question.next != nil 
+        li 
+          = form.submit 'Next Question'
+      - elsif question.next == nil 
+        li 
+          = form.submit 'Submit Survey'
