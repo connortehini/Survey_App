@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_25_124731) do
+ActiveRecord::Schema.define(version: 2022_07_21_183853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: :cascade do |t|
     t.bigint "question_id", null: false
-    t.boolean "choice_1"
-    t.boolean "choice_2"
-    t.boolean "choice_3"
-    t.boolean "choice_4"
-    t.boolean "choice_5"
+    t.boolean "option_1"
+    t.boolean "option_2"
+    t.boolean "option_3"
+    t.boolean "option_4"
+    t.boolean "option_5"
     t.string "multiple_choice_answer"
     t.text "open_ended_answer"
     t.datetime "created_at", precision: 6, null: false
@@ -40,11 +40,11 @@ ActiveRecord::Schema.define(version: 2022_07_25_124731) do
     t.string "title"
     t.bigint "survey_id", null: false
     t.string "question_type"
-    t.text "choice_1"
-    t.text "choice_2"
-    t.text "choice_3"
-    t.text "choice_4"
-    t.text "choice_5"
+    t.text "option_1"
+    t.text "option_2"
+    t.text "option_3"
+    t.text "option_4"
+    t.text "option_5"
     t.text "open_ended_answer"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 2022_07_25_124731) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id", null: false
-    t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,5 +72,4 @@ ActiveRecord::Schema.define(version: 2022_07_25_124731) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "questions", "surveys"
-  add_foreign_key "surveys", "users"
 end

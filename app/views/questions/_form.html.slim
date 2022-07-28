@@ -1,71 +1,79 @@
-
 - if params[:question_type] == nil 
   = form_with model: [@question.survey, @question]  do |form|
     div 
       = form.hidden_field :question_select, value: true
-    div
       = form.label :question_type
     div 
-      = form.select :question_type, [['multiple choice','multiple_choice'], ['open-ended', 'open_ended'], ['multiple-answer','multiple_answer']]
+      = form.select :question_type, [['Multiple choice','multiple_choice'], ['Open-ended', 'open_ended'], ['Multiple answer','multiple_answer']]
     div 
       = form.submit   
 
 -elsif params[:question_type] == 'multiple_choice'
-  = form_with model: [@question.survey, @question] do |form|   
-    div 
+  = form_with model: [@question.survey, @question] do |form|
+    div   
       = form.hidden_field :question_type, value: params[:question_type] 
-    div 
       = form.label :title
+    div 
       = form.text_area :title
     div 
-      = form.label :choice_1 
-      = form.text_field :choice_1 
+      = form.label :option_1 
+    div  
+      = form.text_field :option_1 
     div 
-      = form.label :choice_2 
-      = form.text_field :choice_2
+      = form.label :option_2 
+    div  
+      = form.text_field :option_2
     div 
-      = form.label :choice_3 
-      = form.text_field :choice_3
+      = form.label :option_3 
+    div  
+      = form.text_field :option_3
     div 
-      = form.label :choice_4 
-      = form.text_field :choice_4
+      = form.label :option_4 
+    div  
+      = form.text_field :option_4
     div 
-      = form.label :choice_5
-      = form.text_field :choice_5   
+      = form.label :option_5
+    div  
+      = form.text_field :option_5   
     div 
       = form.submit 
 
 - elsif params[:question_type] == 'open_ended'
-  = form_with model: [survey, question] do |form|
+  = form_with model: [@question.survey, @question] do |form|
     div 
-      = form.hidden_field :question_type, value: params[:question_type]
-    div 
+      = form.hidden_field :question_type, value: params[:question_type] 
       = form.label :title
+    div
       = form.text_area :title
     div 
       = form.submit 'Submit'
 
 -elsif params[:question_type] == 'multiple_answer'
-  = form_with model: [survey, question] do |form|
+  = form_with model: [@question.survey, @question] do |form|
     div 
       =form.hidden_field :question_type, value: params[:question_type]
-    div 
       = form.label :title
+    div
       = form.text_area :title
     div 
-      = form.label :choice_1
-      = form.text_field :choice_1
+      = form.label :option_1
+    div  
+      = form.text_field :option_1
     div 
-      = form.label :choice_2
-      = form.text_field :choice_2
+      = form.label :option_2
+    div  
+      = form.text_field :option_2
     div 
-      = form.label :choice_3
-      = form.text_field :choice_3
+      = form.label :option_3
+    div  
+      = form.text_field :option_3
     div 
-      = form.label :choice_4
-      = form.text_field :choice_4   
+      = form.label :option_4
+    div  
+      = form.text_field :option_4   
     div 
-      = form.label :choice_5
-      = form.text_field :choice_5
+      = form.label :option_5
+    div  
+      = form.text_field :option_5
     div 
       = form.submit 'Submit'

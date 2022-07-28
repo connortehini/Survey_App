@@ -1,48 +1,41 @@
 class QuestionsController < ApplicationController
-
   def new 
     @survey = Survey.find(params[:survey_id])
-    @question = @survey.questions.new 
+    @question= @survey.questions.new
   end 
-
+  
   def create 
     @survey = Survey.find(params[:survey_id])
     if params[:question][:question_select].present?
-      redirect_to new_survey_question_path(@survey, question_type: params[:question][:question_type])
-    else 
-      @question = @survey.questions.new(question_params) 
-    
-      if @question.save 
-        redirect_to survey_path(@survey)
-        flash.notice = 'Question Added'
+       redirect_to new_survey_question_path(@survey, question_type: params[:question][:question_type])
+    else
+      @question = @survey.questions.new(question_params)
+
+      if @question.save
+         redirect_to @survey
       else 
-        render :new 
-        flash.alert = 'Unable To Add Question'
+        render :new
       end 
     end 
   end
   
+  def edit 
+    @question = Question.find(params[:id])
+    @survey = Survey.find(params[:survey_id])
+  end 
 
   def update 
-    @survey = Survey.find(params[:survey_id])
+    @question = Question.find(params[:id])
 
-    if @queston.update(question_params)
-      redirect_to edt_survey_path(@question.survey)
+    if @question.update(question_params)
+      redirect_to root_path
     else 
       render :edit 
     end 
-  end 
-  
-  def destroy
-    @question = Question.find(params[:question_id])
-    @question.destroy
-    redirect_to edit_survey_path(@question.survey)
-  end 
-
+  end
 
   private 
-
   def question_params
-    params.require(:question).permit(:title, :question_type, :choice_1, :choice_2, :choice_3, :choice_4, :choice_5, :open_ended_question, :multiple_choice_answer)
+    params.require(:question).permit(:title, :question_type, :option_1, :option_2, :option_3, :option_4, :option_5, :open_ended_question, :multiple_choice_answer)
   end 
-end
+end 
