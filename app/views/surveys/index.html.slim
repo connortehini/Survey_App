@@ -1,18 +1,19 @@
 
 h1 Surveys  
 
- 
+
 
 - if @surveys != nil
   -@surveys.each do |survey|
     div 
       -if survey.status == 'public' and !user_signed_in? 
         li = link_to survey.title, survey       
-      -else
+      -elsif survey.status == 'public' || 'private' and user_signed_in?
         li = link_to survey.title, survey 
         li = link_to 'Get A Report for this survey', survey_path(survey) + '/report' 
         li  Survey Status: #{survey.status}
-      
+      - else 
+        h1 Please sign in/sign up to edit or create a survey
       
 - else 
   h4 There are no surveys at the moment 
@@ -21,10 +22,6 @@ ul
 -if user_signed_in?
   li 
     =link_to 'Create New survey', new_survey_path
--else  
-    h1 Please sign in/sign up to edit or create a survey
-
-
 
 - if user_signed_in?
   = current_user.email
@@ -36,3 +33,4 @@ ul
   = link_to 'Log in', new_user_session_path
   div 
   = link_to 'Sign up', new_user_registration_path
+ 
