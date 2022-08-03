@@ -7,21 +7,28 @@ h2
   = @survey.description
 
 div 
+- if @question != nil 
+  -if @question.question_type == 'multiple_choice'
+    = render 'multiplechoice', {answer: @question.answers.new, question: @question}
+ 
+  -elsif @question.question_type == 'open_ended'
+    = render 'openended', {answer: @question.answers.new, question: @question}
 
-    -if @question.question_type == 'multiple_choice'
-      = render 'multiplechoice', {answer: @question.answers.new, question: @question}
-   
-    -elsif @question.question_type == 'open_ended'
-      = render 'openended', {answer: @question.answers.new, question: @question}
+  - elsif @question.question_type == 'multiple_answer'
+    = render 'multipleanswer', {answer: @question.answers.new, question: @question}
+-else 
+    h4 There are no questions in this survey
 
-    - elsif @question.question_type == 'multiple_answer'
-      = render 'multipleanswer', {answer: @question.answers.new, question: @question}
+-if user_signed_in?
+  -if current_user == @survey.user
+    li 
+      = link_to 'Edit survey', edit_survey_path
+  -if current_user == @survey.user
+    li 
+      = link_to 'Delete Survey', survey_path, method: :delete, data: {confirm: 'Are you sure'}
+  -if current_user == @survey.user      
+    li 
+      = link_to 'Add question', new_survey_question_path(@survey)
 
 li 
-  = link_to 'Edit survey', edit_survey_path
-li 
-  = link_to 'Delete Survey', survey_path, method: :delete, data: {confirm: 'Are you sure'}
-li 
-  = link_to 'Return Home', root_path 
-li 
-  = link_to 'Add question', new_survey_question_path(@survey)
+      = link_to 'Return Home', root_path 

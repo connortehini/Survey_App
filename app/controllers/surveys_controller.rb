@@ -1,8 +1,17 @@
 class SurveysController < ApplicationController
-  before_action :authenticate_user!
-  
+  skip_before_action :authenticate_user!, only: :index  
+  skip_before_action :authenticate_user!, only: :show 
+
   def index 
-    @surveys = Survey.all
+    if user_signed_in?
+     @surveys = current_user.surveys
+    else
+      @surveys = Survey.all 
+    end 
+  end 
+
+  def report 
+    @survey = Survey.find(params[:survey_id])
   end 
 
   def show 
@@ -14,8 +23,7 @@ class SurveysController < ApplicationController
       @question = Question.find(params[:question_id])
       @answer = @question.answers.new()
     else 
-      @question = Question.first
-      # @question = nil 
+      @question = nil 
     end 
   end 
 
@@ -23,8 +31,9 @@ class SurveysController < ApplicationController
     @survey = Survey.new
   end 
 
-  def create 
-    @survey = Survey.new(survey_params)
+  def create
+    user = current_user 
+    @survey = user.surveys.new(survey_params)
 
     if @survey.save 
       redirect_to @survey
@@ -56,6 +65,6 @@ class SurveysController < ApplicationController
     private
     
     def survey_params
-      params.require(:survey).permit(:title, :description)
+      params.require(:survey).permit(:title, :description, :status, :users_id)
     end
 end

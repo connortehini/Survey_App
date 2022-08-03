@@ -7,5 +7,9 @@
     = form.label :description
   div 
     = form.text_field :description
+  div
+    = form.label :status
+  div 
+    = form.select :status, ['public','private', 'archived'] 
   div 
     = form.submit

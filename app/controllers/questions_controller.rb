@@ -28,11 +28,17 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     if @question.update(question_params)
-      redirect_to root_path
+      redirect_to edit_survey_path
     else 
       render :edit 
     end 
   end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to root_path
+  end 
 
   private 
   def question_params

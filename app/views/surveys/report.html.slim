@@ -1,0 +1,59 @@
+h1
+  = @survey.title
+
+div
+
+
+
+  - @survey.questions.each do |question|
+      = question.title 
+      
+      div
+        -if question.question_type == 'multiple_choice'
+          ul
+            li  
+              - if question.option_1 != ''
+                = question.option_1 + ': ' + question.answers.where(multiple_choice_answer:question.option_1).count().to_s + ' responses ' + ((question.answers.where(multiple_choice_answer:question.option_1).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li 
+              - if question.option_2 != ''
+                = question.option_2 + ': ' + question.answers.where(multiple_choice_answer:question.option_2).count().to_s + ' responses ' + ((question.answers.where(multiple_choice_answer:question.option_2).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li   
+              - if question.option_3 != ''
+                = question.option_3 + ': ' + question.answers.where(multiple_choice_answer:question.option_3).count().to_s + ' responses ' + ((question.answers.where(multiple_choice_answer:question.option_3).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li   
+              - if question.option_4 != ''
+                = question.option_4 + ': ' + question.answers.where(multiple_choice_answer:question.option_4).count().to_s + ' responses ' + ((question.answers.where(multiple_choice_answer:question.option_4).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li   
+              - if question.option_5 != ''
+                = question.option_5 + ': ' + question.answers.where(multiple_choice_answer:question.option_5).count().to_s + ' responses ' + ((question.answers.where(multiple_choice_answer:question.option_5).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+
+        - elsif question.question_type == 'multiple_answer'
+          ul 
+            li 
+              - if question.option_1.present?
+                = question.option_1 + ': ' + question.answers.where(option_1:true).count().to_s + ' responses ' + ((question.answers.where(option_1:true).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li 
+              - if question.option_2.present?
+                = question.option_2 + ': ' + question.answers.where(option_2:true).count().to_s + ' responses ' + ((question.answers.where(option_2:true).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li 
+              - if question.option_3.present?
+                = question.option_3 + ': ' + question.answers.where(option_3:true).count().to_s + ' responses ' + ((question.answers.where(option_3:true).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li 
+              - if question.option_4.present?
+                = question.option_4 + ': ' + question.answers.where(option_4:true).count().to_s + ' responses ' + ((question.answers.where(option_4:true).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+            li
+              - if question.option_5.present?
+                = question.option_5 + ': ' + question.answers.where(option_5:true).count().to_s + ' responses ' + ((question.answers.where(option_5:true).count.to_f / question.answers.count.to_f)*100).to_s + '%'
+          
+        - elsif question.question_type == 'open_ended'
+          ul 
+            - question.answers.each do |answer|
+              li 
+                p = answer.open_ended_answer 
+
+        
+
+
+
+li 
+  = link_to 'Return Home', root_path
