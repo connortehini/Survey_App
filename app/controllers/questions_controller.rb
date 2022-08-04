@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  
+
   def new 
     @survey = Survey.find(params[:survey_id])
     @question= @survey.questions.new
@@ -22,14 +22,13 @@ class QuestionsController < ApplicationController
   
   def edit 
     @question = Question.find(params[:id])
-    @survey = Survey.find(params[:survey_id])
   end 
 
   def update 
     @question = Question.find(params[:id])
 
     if @question.update(question_params)
-      redirect_to edit_survey_path
+      redirect_to survey_path(@question.survey)
     else 
       render :edit 
     end 
@@ -38,7 +37,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question = Question.find(params[:id])
     @question.destroy
-    redirect_to root_path
+    redirect_to survey_path(@question.survey)
   end 
 
   private 

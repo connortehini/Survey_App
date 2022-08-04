@@ -1,7 +1,11 @@
+-if flash.alert.present?
+  div 
+    = flash.alert.sub('Multiple answer ','')
 = form_with model: answer do |form|
   div 
     = form.hidden_field :question_id, value:question.id 
     = form.label answer.question.title
+    
   - if answer.question.option_1
     div 
       = form.check_box :option_1

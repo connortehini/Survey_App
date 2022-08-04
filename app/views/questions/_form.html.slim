@@ -14,27 +14,27 @@
       = form.hidden_field :question_type, value: params[:question_type] 
       = form.label :title
     div 
-      = form.text_area :title
+      = form.text_area :title, :required => true
     div 
       = form.label :option_1 
     div  
-      = form.text_field :option_1 
+      = form.text_field :option_1, :required => true
     div 
       = form.label :option_2 
     div  
-      = form.text_field :option_2
+      = form.text_field :option_2, :required => true
     div 
       = form.label :option_3 
     div  
-      = form.text_field :option_3
+      = form.text_field :option_3, :required => true
     div 
       = form.label :option_4 
     div  
-      = form.text_field :option_4
+      = form.text_field :option_4, :required => true
     div 
       = form.label :option_5
     div  
-      = form.text_field :option_5   
+      = form.text_field :option_5, :required => true   
     div 
       = form.submit 
 
@@ -44,7 +44,7 @@
       = form.hidden_field :question_type, value: params[:question_type] 
       = form.label :title
     div
-      = form.text_area :title
+      = form.text_area :title, :required => true 
     div 
       = form.submit 'Submit'
 
@@ -54,26 +54,26 @@
       =form.hidden_field :question_type, value: params[:question_type]
       = form.label :title
     div
-      = form.text_area :title
+      = form.text_area :title, :required => true
     div 
       = form.label :option_1
     div  
-      = form.text_field :option_1
+      = form.text_field :option_1, :required => true
     div 
       = form.label :option_2
     div  
-      = form.text_field :option_2
+      = form.text_field :option_2, :required => true
     div 
       = form.label :option_3
     div  
-      = form.text_field :option_3
+      = form.text_field :option_3, :required => true
     div 
       = form.label :option_4
     div  
-      = form.text_field :option_4   
+      = form.text_field :option_4, :required => true
     div 
       = form.label :option_5
     div  
-      = form.text_field :option_5
+      = form.text_field :option_5, :required => true
     div 
       = form.submit 'Submit'

@@ -11,7 +11,9 @@ skip_before_action :authenticate_user!, only: :create
         redirect_to root_path
       end 
     else 
-      render :new
+      question = Question.find(params[:answer][:question_id])
+      redirect_to survey_path(question.survey, question_id: params[:answer][:question_id]), alert: @answer.errors.full_messages[0]
+      
     end 
   end 
 

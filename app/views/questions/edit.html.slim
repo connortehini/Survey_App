@@ -1,7 +1,7 @@
 h1 Edit Question 
   
 - if params[:question_type] == 'multiple_choice'
-  = form_with model: [@survey, @question] do |form|
+  = form_with model:[@question.survey, @question] do |form|
     div   
       = form.hidden_field :question_type, value: params[:question_type] 
       = form.label :title
@@ -69,4 +69,7 @@ h1 Edit Question
       = form.text_field :option_5
     div 
       = form.submit 'Submit'
+
+li 
+  = link_to 'Return Home', root_path 
 

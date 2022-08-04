@@ -43,6 +43,7 @@ class SurveysController < ApplicationController
 
     def edit 
       @survey = Survey.find(params[:id])
+      
     end 
 
     def update

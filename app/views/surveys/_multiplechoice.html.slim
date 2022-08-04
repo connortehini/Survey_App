@@ -1,3 +1,6 @@
+-if flash.alert.present?
+  div 
+    = flash.alert.sub('Multiple choice answer ','')
 =form_with model: answer do |form|
   div 
     = form.hidden_field :question_id, value: question.id
@@ -5,28 +8,28 @@
   
   - if answer.question.option_1 !=''
     div
-      = form.radio_button :multiple_choice_answer, answer.question.option_1
+      = form.radio_button :option_1, answer.question.option_1
       = form.label answer.question.option_1
   
   - if answer.question.option_2 !=''
     div
-      = form.radio_button :multiple_choice_answer, answer.question.option_2
+      = form.radio_button :option_2, answer.question.option_2
       =form.label answer.question.option_2   
   
   - if answer.question.option_3 !=''
     div
-      = form.radio_button :multiple_choice_answer, answer.question.option_3
+      = form.radio_button :option_3, answer.question.option_3
       = form.label answer.question.option_3 
   
   - if answer.question.option_4 !=''
     div
-      = form.radio_button :multiple_choice_answer, answer.question.option_4
+      = form.radio_button :option_4, answer.question.option_4
 
       =form.label answer.question.option_4
   
   - if answer.question.option_5 !=''
     div
-      = form.radio_button :multiple_choice_answer, answer.question.option_5
+      = form.radio_button :option_5, answer.question.option_5
       =form.label answer.question.option_5
     div     
       ul 
